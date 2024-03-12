@@ -2,7 +2,9 @@ let express = require('express');
 let app = express();
 let bodyParser = require('body-parser');
 let mysql = require('mysql');
+let cors = require('cors');
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -44,6 +46,8 @@ app.get('/Namelists', (req, res) => {
 
 
 app.get('/Namelists/:house', (req, res) => {
+    let house = req.params.house;
+    
     dbCon.query('SELECT * FROM student WHERE house=?', house, (error, results, fields) => {
         if (error) throw error;
 
