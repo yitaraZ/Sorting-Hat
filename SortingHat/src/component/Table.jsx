@@ -46,10 +46,8 @@ export default function Table() {
 
     return (
         <>
-            <div className="hero-content text-center text-neutral-content">
-                <div className="max-w-md">
-                    <h1 className="mb-5 text-4xl font-bold text-white ">Student of 4kings</h1>
-                </div>
+            <div className="max-w-md mx-auto">
+                <h1 className="mb-5 text-4xl font-bold text-white ">Student of 4kings</h1>
             </div>
             <br />
             <Filter FilterFunciton={filterall} />
