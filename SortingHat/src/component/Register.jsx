@@ -14,6 +14,24 @@ export default function Register() {
     const handleRegister = () => {
         if (registeredStudents < maxStudents) {
             setRegisteredStudents(prevCount => prevCount + 1);
+            const randomHouse = Math.floor(Math.random() * 4) + 1;
+            let houseName = '';
+            switch (randomHouse) {
+                case 1:
+                    houseName = 'Prachachuen';
+                    break;
+                case 2:
+                    houseName = 'Kanok';
+                    break;
+                case 3:
+                    houseName = 'Intorn';
+                    break;
+                case 4:
+                    houseName = 'Buranapol';
+                    break;
+                default:
+                    houseName = 'Unknown';}
+            alert(`You've registered successfully. Your assigned house is ${houseName}.`);
         } else {
             alert("You've reached the maximum number of registered students.");
         }

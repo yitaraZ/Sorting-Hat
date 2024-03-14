@@ -46,7 +46,7 @@ export default function Table() {
 
     return (
         <>
-            <div className="max-w-md mx-auto">
+            <div className="max-w-md mx-auto justify-center flex">
                 <h1 className="mb-5 text-4xl font-bold text-white ">Student of 4kings</h1>
             </div>
             <br />
@@ -57,7 +57,7 @@ export default function Table() {
                     <div key={val.id}>
 
                         <OutlineCard key={val.id} data={val} />
-
+                        
                     </div>
                 ))}
             </div>
