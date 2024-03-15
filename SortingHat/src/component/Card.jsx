@@ -1,13 +1,17 @@
 import * as React from 'react';
+import Update from './Update';
 
 
 export default function OutlineCard({ data }) {
+
+
   return (
-    <div className="card w-80 bg-yellow-500 text-primary-content m-4 p-2">
+    <div className="card w-80 bg-yellow-500 text-primary-content m-2 ">
       <div className="card-body">
         <h2 className="card-title" > {data.name}</h2>
         <p>Email: {data.email}</p>
         <p>House: {data.house}</p>
+        {/* <Update data={data}/> */}
       </div>
     </div>
   );

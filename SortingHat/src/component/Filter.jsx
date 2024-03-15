@@ -16,7 +16,7 @@ export default function ColorButtons({FilterFunciton }) {
                     Kanok
                 </Button>
                 <Button className="btn btn-outline btn-warning" onClick={FilterFunciton[3]}>
-                    Intorn
+                    Indara
                 </Button>
                 <Button className="btn btn-outline btn-warning" onClick={FilterFunciton[4]}>
                     Buranapol

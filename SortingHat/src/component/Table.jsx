@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import OutlineCard from "./Card";
 import Filter from "./Filter";
-import Typography from '@mui/material/Typography';
+import Delete from "./Delete";
 
 
 export default function Table() {
@@ -31,7 +31,7 @@ export default function Table() {
     }
 
     const intorn = async () => {
-        const response = await axios.get("http://localhost:3030/Namelists/Intorn");
+        const response = await axios.get("http://localhost:3030/Namelists/Indara");
         const dataArray = Array.isArray(response.data.data) ? response.data.data : [];
         setStudents(dataArray);
     }
@@ -50,11 +50,12 @@ export default function Table() {
                 <h1 className="mb-5 text-4xl font-bold text-white ">Student of 4kings</h1>
             </div>
             <br />
+            <Delete />
             <Filter FilterFunciton={filterall} />
             <br />
-            <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginInline: '60px' }}>
+            <div style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', marginInline: '50px' }}>
                 {students.map(val => (
-                    <div key={val.id}>
+                    <div key={val.id} >
 
                         <OutlineCard key={val.id} data={val} />
                         

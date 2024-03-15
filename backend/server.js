@@ -62,15 +62,33 @@ app.get('/Namelists/:house', (req, res) => {
 
 })
 
+app.get('/Namelists/id/:id', (req, res) => {
+    let id = req.params.id;
+    
+    dbCon.query('SELECT * FROM student WHERE id=?', id, (error, results, fields) => {
+        if (error) throw error;
+
+        let message = ""
+        if (results === undefined || results.length == 0) {
+            message = "Student is empty";
+        } else {
+            message = "Successfully retrieved all student";
+        }
+        return res.send({ error: false, data: results, message: message });
+    })
+
+})
+
 app.post('/Namelist', (req, res) => {
     let name = req.body.name;
+    let email = req.body.email;
     let house = req.body.house;
 
     //validation
-    if (!name || !house) {
+    if (!name || !house || !email) {
         return res.status(400).send({ error: true, message: "Please provide name" });
     } else {
-        dbCon.query('INSERT INTO student (name,house) VALUES(?, ?)', [name, house], (error, results, fields) => {
+        dbCon.query('INSERT INTO student (name,email,house) VALUES(?, ?, ?)', [name, email, house], (error, results, fields) => {
             if (error) throw error;
             return res.send({ error: false, data: results, message: "student successfully added" })
         })
@@ -92,6 +110,33 @@ app.delete('/Namelist', (req, res) => {
     })
 })
 
+app.put('/Namelists-Update', (req,res) => {
+    let id = req.body.id;
+    let name = req.body.name;
+    let email = req.body.email;
+
+    if(!id){
+        return res.status(400).send({error : true, message: "Please provide id"});
+    }else{
+        let updateObject = {};
+        if (name !== undefined) updateObject.name = name;
+        if (email !== undefined) updateObject.email = email;
+
+        if (Object.keys(updateObject).length === 0) {
+            return res.status(400).send({ error: true, message: "No valid fields provided for update." });
+        }
+        
+        dbCon.query('UPDATE tickets SET ? WHERE id = ?', [updateObject, id], (error, results, fields) => {
+            if (error) throw error;
+
+            let message = results.changedRows === 0
+                ? "Student not found or no changes made"
+                : "Student successfully updated";
+
+            return res.send({ error: false, data: results, message: message });
+        });
+    }
+})
 
 
 

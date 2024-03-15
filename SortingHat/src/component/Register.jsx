@@ -1,8 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 
 export default function Register() {
     const [registeredStudents, setRegisteredStudents] = useState(0);
     const [maxStudents, setMaxStudents] = useState(0);
+
+    const [name, setname] = useState('');
+    const [email, setemail] = useState('');
+
+    const [prachachuenCount, setPrachachuenCount] = useState(0);
+    const [kanokCount, setKanokCount] = useState(0);
+    const [indaraCount, setIndaraCount] = useState(0);
+    const [buranapolCount, setBuranapolCount] = useState(0);
 
     const constmax = (event) => {
         const newValue = parseInt(event.target.value);
@@ -11,33 +20,61 @@ export default function Register() {
         }
     };
 
-    const handleRegister = () => {
+    //console.log(prachachuenCount,kanokCount,indaraCount,buranapolCount);
+    const handleRegister = async (e) => {
         if (registeredStudents < maxStudents) {
             setRegisteredStudents(prevCount => prevCount + 1);
-            const randomHouse = Math.floor(Math.random() * 4) + 1;
-            let houseName = '';
-            switch (randomHouse) {
-                case 1:
-                    houseName = 'Prachachuen';
+
+            // Find the minimum count among all houses
+            const minCount = Math.min(prachachuenCount, kanokCount, indaraCount, buranapolCount);
+
+            // Collect houses with the minimum count
+            const minHouses = [];
+            if (prachachuenCount === minCount) minHouses.push("Prachachuen");
+            if (kanokCount === minCount) minHouses.push("Kanok");
+            if (indaraCount === minCount) minHouses.push("Indara");
+            if (buranapolCount === minCount) minHouses.push("Buranapol");
+
+            // Randomly select a house from the minimum count houses
+            const randomHouseName = minHouses[Math.floor(Math.random() * minHouses.length)];
+
+            // Increment the count for the selected house
+            switch (randomHouseName) {
+                case "Prachachuen":
+                    setPrachachuenCount(prevCount => prevCount + 1);
                     break;
-                case 2:
-                    houseName = 'Kanok';
+                case "Kanok":
+                    setKanokCount(prevCount => prevCount + 1);
                     break;
-                case 3:
-                    houseName = 'Intorn';
+                case "Indara":
+                    setIndaraCount(prevCount => prevCount + 1);
                     break;
-                case 4:
-                    houseName = 'Buranapol';
+                case "Buranapol":
+                    setBuranapolCount(prevCount => prevCount + 1);
                     break;
                 default:
-                    houseName = 'Unknown';}
-            alert(`You've registered successfully. Your assigned house is ${houseName}.`);
+                    break;
+            }
+
+            alert(`You've registered successfully. Your assigned house is ${randomHouseName}.`);
+            console.log(randomHouseName);
+            e.preventDefault();
+
+            try {
+                const response = await axios.post("http://localhost:3030/Namelist", {
+                    name: name,
+                    email: email,
+                    house: randomHouseName,
+                });
+                console.log('Add new student:', response.data);
+            } catch (error) {
+                console.error('Error creating new ticket:', error);
+            }
         } else {
             alert("You've reached the maximum number of registered students.");
         }
     };
 
-    console.log(registeredStudents, maxStudents)
     return (
         <>
             <button className="btn bg-red-500 text-white font-bold text-2xl" onClick={() => document.getElementById('my_modal_5').showModal()}>Register</button>
@@ -46,7 +83,7 @@ export default function Register() {
                     <div className="hero-content flex-col lg:flex-row-reverse">
                         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100  m-10">
                             <form method="dialog">
-                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
                             </form>
                             <form className="card-body">
                                 <div className="form-control flex-col">
@@ -60,13 +97,15 @@ export default function Register() {
                                     <label className="label">
                                         <span className="label-text">Name</span>
                                     </label>
-                                    <input type="name" placeholder="first-lastname" className="input input-bordered" required />
+                                    <input type="name" placeholder="first-lastname" className="input input-bordered"
+                                        value={name} onChange={(e) => setname(e.target.value)} required />
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
                                         <span className="label-text">Email</span>
                                     </label>
-                                    <input type="email" placeholder="email" className="input input-bordered" required />
+                                    <input type="email" placeholder="email" className="input input-bordered"
+                                        value={email} onChange={(e) => setemail(e.target.value)} required />
                                 </div>
                                 <div className="form-control mt-6">
                                     <a className="btn bg-red-500  text-white font-bold" onClick={handleRegister}>Find house</a>
