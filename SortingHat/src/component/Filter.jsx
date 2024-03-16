@@ -4,10 +4,10 @@ import Button from '@mui/material/Button';
 
 export default function ColorButtons({FilterFunciton }) {
     return (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ display: 'flex', justifyContent: 'center'}} className='p-4'>
             <Stack direction="row" spacing={2}>
                 <Button className="btn btn-outline btn-warning" onClick={FilterFunciton[0]}>
-                    All student
+                    All
                 </Button>
                 <Button className="btn btn-outline btn-warning" onClick={FilterFunciton[1]}>
                     Prachachuen

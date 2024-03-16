@@ -49,19 +49,26 @@ export default function Table() {
             <div className="max-w-md mx-auto justify-center flex">
                 <h1 className="mb-5 text-4xl font-bold text-white ">Student of 4kings</h1>
             </div>
-            <br />
-            <Delete />
+            <div className="flex justify-center m-4">
+                <div className="stats shadow ">
+                    <div className="stat">
+                        <div className="stat-title text-white">Total students</div>
+                        <div className="stat-value text-center text-yellow-500">{students.length}</div>
+                    </div>
+                </div>
+            </div>
             <Filter FilterFunciton={filterall} />
-            <br />
-            <div style={{ display: 'flex',flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', marginInline: '50px' }}>
-                {students.map(val => (
-                    <div key={val.id} >
+            
+            
+            <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', marginInline: '50px' }}>
 
+                {students.map(val => (
+                    <div key={val.id}>
                         <OutlineCard key={val.id} data={val} />
-                        
                     </div>
                 ))}
             </div>
+            <Delete />
         </>
     )
 }

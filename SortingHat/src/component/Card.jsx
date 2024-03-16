@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Update from './Update';
 
 
 export default function OutlineCard({ data }) {
@@ -11,7 +10,7 @@ export default function OutlineCard({ data }) {
         <h2 className="card-title" > {data.name}</h2>
         <p>Email: {data.email}</p>
         <p>House: {data.house}</p>
-        {/* <Update data={data}/> */}
+        
       </div>
     </div>
   );

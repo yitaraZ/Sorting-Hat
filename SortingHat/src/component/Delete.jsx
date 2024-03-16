@@ -22,7 +22,7 @@ export default function Delete() {
 
         <div className="max-w-md mx-auto justify-center flex m-4">
             <button className="btn bg-red-500 text-white font-bold text-2xl" 
-            onClick={DeleteAll}>Delete data</button>
+            onClick={DeleteAll}>Delete all</button>
         </div>
 
     )
