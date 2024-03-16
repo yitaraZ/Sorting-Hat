@@ -49,8 +49,8 @@ export default function Table() {
             <div className="max-w-md mx-auto justify-center flex">
                 <h1 className="mb-5 text-4xl font-bold text-white ">Student of 4kings</h1>
             </div>
-            <div className="flex justify-center m-4">
-                <div className="stats shadow ">
+            <div className="flex justify-center m-4 ">
+                <div className="stats shadow bg-base-100 ">
                     <div className="stat">
                         <div className="stat-title text-white">Total students</div>
                         <div className="stat-value text-center text-yellow-500">{students.length}</div>
