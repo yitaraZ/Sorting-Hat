@@ -17,7 +17,6 @@ git clone https://github.com/yitaraZ/Sorting-Hat.git
 ```
 เปลี่ยน directory ไปที่ SortingHat ที่เป็น front-end
 ```
-cd Sorting-Hat
 cd SortingHat
 ```
 ติดตั้ง dependency 
