@@ -3,6 +3,7 @@
 ## Installation
 
 install database "4king.sql" before use clone git command
+ส่วนตัวใช้ xampp ในการ run apache และ Mysql
 
 ### ติดตั้ง Front-end
 
