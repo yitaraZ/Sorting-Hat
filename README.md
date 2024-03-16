@@ -36,5 +36,17 @@ cd backend
 ```
 npm i
 ```
+------------------------------------------------------
 
+### Start 
 
+front end 
+```
+cd SortingHat
+npm run dev
+```
+back end
+```
+cd backend
+npm run dev
+```
